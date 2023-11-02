@@ -43,11 +43,11 @@ fn main() {
 
     println!("serializing batches and save to file...");
     let batches_bin = serde_json::to_vec_pretty(&batches).unwrap();
-    fs::write("testdata/batches.json", batches_bin).unwrap();
+    fs::write("../testdata/batches.json", batches_bin).unwrap();
 
     println!("serializing keys and save to file...");
     let keys_bin = serde_json::to_vec_pretty(&keys).unwrap();
-    fs::write("testdata/keys.json", keys_bin).unwrap();
+    fs::write("../testdata/keys.json", keys_bin).unwrap();
 
     println!("done!");
 }

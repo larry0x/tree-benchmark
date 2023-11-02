@@ -4,7 +4,7 @@ use {
     tree::Batch,
 };
 
-const DB_PATH: &str = "testdata/db/merk";
+const DB_PATH: &str = "../testdata/db/merk";
 
 fn bench_write(merk: &mut Merk, batches: Vec<Vec<merk::BatchEntry>>) {
     let start_time = Instant::now();
@@ -17,8 +17,9 @@ fn bench_write(merk: &mut Merk, batches: Vec<Vec<merk::BatchEntry>>) {
     }
     let elapsed_time = start_time.elapsed();
 
-    println!("elapsed time: {elapsed_time:?}");
-    println!("writes per second: {}", num_writes as f64 / elapsed_time.as_secs_f64());
+    println!("elapsed time:  {elapsed_time:?}");
+    println!("num writes:    {num_writes}");
+    println!("writes/second: {}", num_writes as f64 / elapsed_time.as_secs_f64());
 }
 
 fn bench_read(merk: &Merk, keys: &[Vec<u8>]) {
@@ -29,14 +30,15 @@ fn bench_read(merk: &Merk, keys: &[Vec<u8>]) {
     let elapsed_time = start_time.elapsed();
 
     println!("elapsed time: {elapsed_time:?}");
-    println!("reads per second: {}", keys.len() as f64 / elapsed_time.as_secs_f64());
+    println!("num reads:    {}", keys.len());
+    println!("reads/second: {}", keys.len() as f64 / elapsed_time.as_secs_f64());
 }
 
 fn main() {
-    let batches_bin = fs::read("testdata/batches.json").unwrap();
+    let batches_bin = fs::read("../testdata/batches.json").unwrap();
     let batches: Vec<Batch<String, String>> = serde_json::from_slice(&batches_bin).unwrap();
 
-    let keys_bin = fs::read("testdata/keys.json").unwrap();
+    let keys_bin = fs::read("../testdata/keys.json").unwrap();
     let keys: Vec<String> = serde_json::from_slice(&keys_bin).unwrap();
 
     // convert tree::Batch to merk::Batch
