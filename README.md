@@ -12,7 +12,7 @@ Methodology:
 - Write: 1,000,000 random keys and values in 2,000 batches, each being a random alphanumeric string, split into multiple batches
 - Read: 100,000 keys randomly sampled from the above set
 - IAVL uses GoLevelDB backend with 50 MB cache
-- Merk and Tree use RocksDB backend. Idk if Merk has any sort of read cache; Tree doesn't have caching yet, every read is directly from disk
+- Merk and Tree use RocksDB backend with default config
 
 |                     | writes per second | reads per second |
 | ------------------- | ----------------- | ---------------- |
